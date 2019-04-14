@@ -1,7 +1,5 @@
-```
 export PATH=.:$PATH
 shopt -s direxpand
-export sk=/mnt/hgfs/C/Users/Vikram/POT/POT_ICPD/LabScripts/
 
 alias root='sudo su -'
 alias sedc="sed -e '/^$/d' -e '/^#.*$/d'"
@@ -147,3 +145,19 @@ function klogs() { kubectl logs $*;}
 function kclogs() { kubectl -n kube-system logs $*;}
 function dpod() { N=$1; shift; NAME=$(kubectl get pods -o json | jq -r .items[$N].metadata.name); kubectl describe pod $NAME;}
 function kdn() { N=$1; kubectl describe node 192.168.142.10${N};}
+
+function sc ()
+{
+  N=$1
+  shift
+  kubectl config set-context $(kubectl config current-context) --namespace=$N
+  export PS1="\[\e[1;32m\][\u@\h $(cs)\W]#\[\033[00m\] "
+}
+
+function cs ()
+{
+  CC=$(kubectl config current-context)
+  NS=$(kubectl config view -o jsonpath="{.contexts[?(@.name==\"$CC\")].context.namespace}")
+  export PS1="\[\e[1;32m\][\u@\h ($NS)\W]#\[\033[00m\] "
+  echo "($NS)"
+}
