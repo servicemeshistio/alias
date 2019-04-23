@@ -22,6 +22,7 @@ alias fc='fcslogrpt /var/log/messages'
 
 alias k="kubectl"
 alias kgp="kubectl get pods"
+alias kgpip="kubectl -n istio-lab get pods -o=custom-columns=NAME:.metadata.name,POD_IP:.status.podIP,HOST_IP:.status.hostIP"
 alias kgpw="kubectl get pods -o wide"
 alias kgpr="kubectl get pods --sort-by=.metadata.creationTimestamp --field-selector=status.phase!=Succeeded"
 alias kgpnr="kubectl get po -o wide --all-namespaces --field-selector=status.phase!=Succeeded | grep -vE '1/1|2/2|3/3|4/4'"
