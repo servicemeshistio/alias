@@ -21,6 +21,9 @@ alias sl='tail -f /var/log/messages'
 alias fc='fcslogrpt /var/log/messages'
 
 alias k="kubectl"
+alias kg="kubectl get"
+alias kcg="kubectl -n kube-system get"
+alias kig="kubectl -n istio-lab get"
 alias kgp="kubectl get pods"
 alias kgpw="kubectl get pods -o wide"
 alias kgpr="kubectl get pods --sort-by=.metadata.creationTimestamp --field-selector=status.phase!=Succeeded"
